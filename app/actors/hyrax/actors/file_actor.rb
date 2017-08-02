@@ -23,7 +23,7 @@ module Hyrax
       def ingest_file(io)
         # Skip versioning because versions will be minted by VersionCommitter as necessary during save_characterize_and_record_committer.
         Hydra::Works::AddFileToFileSet.call(file_set,
-                                            io,
+                                            io.uploaded_file.uploader.sanitized_file.file,
                                             relation,
                                             versioning: false)
         return false unless file_set.save
